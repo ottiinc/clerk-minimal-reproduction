@@ -5,6 +5,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { MultisessionAppSupport } from "@clerk/nextjs/internal";
 import "./globals.css";
 
 export default function RootLayout({
@@ -14,19 +15,21 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body>
-          <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
-          <main>{children}</main>
-        </body>
-      </html>
+      <MultisessionAppSupport>
+        <html lang="en">
+          <body>
+            <header>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </header>
+            <main>{children}</main>
+          </body>
+        </html>
+      </MultisessionAppSupport>
     </ClerkProvider>
   );
 }
